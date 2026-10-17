@@ -103,7 +103,7 @@ accumulator cache is disabled by default. Do not change developer optimization s
 
 ## Package verification
 
-VPK SHA256: 1f8271ae95d150e8c27dff228c6748a3c2c60229a8c1b409d514226e675990ca
-VPK size: 808786 bytes.
+VPK SHA256: c3269c489af0288ba3ce534d061d838642af3dfc88b32b7d065bd3086b373174
+VPK size: 808945 bytes.
 
 Public downloads contain only the VPK and README. Private source, symbols, logs and game files are not release assets.
