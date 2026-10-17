@@ -1,0 +1,7 @@
+*.img
+*.ipa
+DukeNukemMP
+imports-preparation.h
+output/
+__pycache__/
+*.pyc

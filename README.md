@@ -1,11 +1,14 @@
 # Duke Nukem: Manhattan Project — PS Vita tester alpha.1
 
+**Status: alpha preparation; no public download has been published yet.**
 
-Experimental port of the original iOS ARMv7 build. This public repository currently contains this README;
-the VPK is staged in an unpublished draft. The port's source code and development history remain private.
+Experimental port of the original iOS ARMv7 build. This public repository contains the tester instructions and
+image-preparation scripts; the VPK is staged in an unpublished draft. The port's runtime source code and development history remain private.
 No original game data is included.
 
-This is a compatibility/testing alpha, not a finished release.
+This is a compatibility/testing alpha, not a finished release. Earlier builds have been tested on a real Vita,
+including levels and the helicopter boss. The new light/full profiling build has passed PC/ARM safety checks;
+its profiling overhead and compatibility still need real-device feedback. Sustained 25 FPS combat is not assured.
 
 ## Requirements and installation
 
@@ -14,26 +17,41 @@ This is a compatibility/testing alpha, not a finished release.
 - Your own supported original iOS 1.0.11 game files, plus a locally prepared dnmp_ios.img from that exact ARMv7 binary.
   The PC/Steam game files are not compatible with this loader.
 
+**Generate your game image locally using [the preparation tools](https://github.com/myname24/dnmp-vita/tree/main/tools/data-prep).** New installations
+require this image; extracting an IPA alone is not enough. The tools require Python 3 without additional packages.
+Do not obtain or share a prebuilt game image or the original game data through this repository or its issue reports.
+
+1. Back up your existing saves/data before testing. Keep Documents/ and your game configuration.
+2. Put the contents of your supported DukeNukemMP.app folder and your locally prepared dnmp_ios.img in
+   ux0:data/dnmp_ios/. Keep the original subfolder structure (including duke/, data/ and sys/ where present).
+3. Install dnmp-vita-alpha.1.vpk using VitaShell. If upgrading an existing working installation, install the VPK
+   only; there is no game-image change in this alpha.
+4. Start the game. Menus use the front touchscreen. Use the same graphics settings when comparing performance.
+
+Runtime projects: [kubridge](https://github.com/bythos14/kubridge) and [vitaGL](https://github.com/Rinnegatamante/vitaGL).
+This package does not include game assets, the game image or console system modules.
+
 ## Data preparation for a fresh installation
 
 1. Use your own supported iOS version 1.0.11 game files. The executable must contain usable, decrypted ARMv7
    code. Other versions and PC/Steam files are not supported by this build.
 2. Extract the IPA as a ZIP archive and locate `Payload/DukeNukemMP.app/`.
-3. Generate `dnmp_ios.img` from that folder's `DukeNukemMP` executable using the preparation tools.
-   These tools are not currently available in this public repository. If you already have access to them,
-   run the following in Linux/WSL, replacing the generic paths with your own:
+3. Download the repository ZIP and extract it, or download the three Python files in `tools/data-prep/`.
+   Keep them together. Open a terminal in that folder and generate the image, replacing the generic input path:
 
-   ```bash
-   cd /path/to/vita-dnmp
-   mkdir -p build/ios
-   python3 ios/tools/prelink.py \
-     "/path/to/Payload/DukeNukemMP.app/DukeNukemMP" \
-     build/ios/dnmp_ios.img \
-     build/ios/imports-preparation.h
+   Windows PowerShell:
+   ```powershell
+   py -3 prepare_image.py "C:\path\to\Payload\DukeNukemMP.app\DukeNukemMP" --output-dir output
    ```
 
-   The converter does not decrypt an encrypted executable. The generated imports header is a preparation
-   output and does not need to be copied to the Vita.
+   Linux/macOS/WSL:
+   ```bash
+   python3 prepare_image.py "/path/to/Payload/DukeNukemMP.app/DukeNukemMP" --output-dir output
+   ```
+
+   The image is written to `output/dnmp_ios.img`. The wrapper checks the exact supported ARMv7 slice,
+   rejects encrypted inputs and preserves existing output files. The converter does not decrypt executables.
+   The generated imports header is a preparation output and does not need to be copied to the Vita.
 4. Copy the **contents** of `DukeNukemMP.app/` and the generated `dnmp_ios.img` into `ux0:data/dnmp_ios/`.
    Preserve the original filenames and directory structure. Do not add a nested `DukeNukemMP.app/` folder.
 
@@ -129,4 +147,5 @@ accumulator cache is disabled by default. Do not change developer optimization s
 VPK SHA256: c3269c489af0288ba3ce534d061d838642af3dfc88b32b7d065bd3086b373174
 VPK size: 808945 bytes.
 
-Public downloads contain only the VPK and README. Private source, symbols, logs and game files are not release assets.
+Release attachments contain only the VPK and README. The repository also provides image-preparation scripts.
+Private runtime source, symbols, logs and game files are not release assets.
