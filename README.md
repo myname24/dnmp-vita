@@ -2,8 +2,9 @@
 
 **Status: alpha preparation; no public download has been published yet.**
 
-Experimental port of the original iOS ARMv7 build. This public repository contains the release VPK and this
-README; the port's source code and development history remain private. No original game data is included.
+Experimental port of the original iOS ARMv7 build. This public repository currently contains this README;
+the VPK is staged in an unpublished draft. The port's source code and development history remain private.
+No original game data is included.
 
 This is a compatibility/testing alpha, not a finished release. Earlier builds have been tested on a real Vita,
 including levels and the helicopter boss. The new light/full profiling build has passed PC/ARM safety checks;
@@ -16,9 +17,9 @@ its profiling overhead and compatibility still need real-device feedback. Sustai
 - Your own supported original iOS 1.0.11 game files, plus a locally prepared dnmp_ios.img from that exact ARMv7 binary.
   The PC/Steam game files are not compatible with this loader.
 
-**Data preparation is not included in this binary-only alpha.** This release is currently for testers who already
-have a correctly prepared data folder. A public preparation utility is not part of this release. Do not obtain or
-share a prebuilt game image or the original game data through this repository or its issue reports.
+**The preparation utility is not included in this binary-only alpha.** New installations require a locally
+generated game image; extracting an IPA alone is not enough. Do not obtain or share a prebuilt game image or
+the original game data through this repository or its issue reports.
 
 1. Back up your existing saves/data before testing. Keep Documents/ and your game configuration.
 2. Put the contents of your supported DukeNukemMP.app folder and your locally prepared dnmp_ios.img in
@@ -29,6 +30,45 @@ share a prebuilt game image or the original game data through this repository or
 
 Runtime projects: [kubridge](https://github.com/bythos14/kubridge) and [vitaGL](https://github.com/Rinnegatamante/vitaGL).
 This package does not include game assets, the game image or console system modules.
+
+## Data preparation for a fresh installation
+
+1. Use your own supported iOS version 1.0.11 game files. The executable must contain usable, decrypted ARMv7
+   code. Other versions and PC/Steam files are not supported by this build.
+2. Extract the IPA as a ZIP archive and locate `Payload/DukeNukemMP.app/`.
+3. Generate `dnmp_ios.img` from that folder's `DukeNukemMP` executable using the preparation tools.
+   These tools are not currently available in this public repository. If you already have access to them,
+   run the following in Linux/WSL, replacing the generic paths with your own:
+
+   ```bash
+   cd /path/to/vita-dnmp
+   mkdir -p build/ios
+   python3 ios/tools/prelink.py \
+     "/path/to/Payload/DukeNukemMP.app/DukeNukemMP" \
+     build/ios/dnmp_ios.img \
+     build/ios/imports-preparation.h
+   ```
+
+   The converter does not decrypt an encrypted executable. The generated imports header is a preparation
+   output and does not need to be copied to the Vita.
+4. Copy the **contents** of `DukeNukemMP.app/` and the generated `dnmp_ios.img` into `ux0:data/dnmp_ios/`.
+   Preserve the original filenames and directory structure. Do not add a nested `DukeNukemMP.app/` folder.
+
+   ```text
+   ux0:data/dnmp_ios/
+   ├── dnmp_ios.img
+   ├── DukeNukemMP
+   ├── prism3d.ini
+   ├── duke/
+   ├── data/
+   ├── sys/
+   └── other original app files
+   ```
+
+5. Install the VPK through VitaShell after configuring the runtime requirements above. For an existing working
+   installation, install only the new VPK; preserve `Documents/`, your configuration and the existing game image.
+6. Launch with `fullprofile.txt` absent for normal testing. After exiting, collect the session folder identified
+   by `ux0:data/dnmp_ios/latest_report.txt` as described below.
 
 ## Controls
 
