@@ -1,14 +1,11 @@
 # Duke Nukem: Manhattan Project — PS Vita tester alpha.1
 
-**Status: alpha preparation; no public download has been published yet.**
 
 Experimental port of the original iOS ARMv7 build. This public repository currently contains this README;
 the VPK is staged in an unpublished draft. The port's source code and development history remain private.
 No original game data is included.
 
-This is a compatibility/testing alpha, not a finished release. Earlier builds have been tested on a real Vita,
-including levels and the helicopter boss. The new light/full profiling build has passed PC/ARM safety checks;
-its profiling overhead and compatibility still need real-device feedback. Sustained 25 FPS combat is not assured.
+This is a compatibility/testing alpha, not a finished release.
 
 ## Requirements and installation
 
@@ -16,20 +13,6 @@ its profiling overhead and compatibility still need real-device feedback. Sustai
 - libshacccg.suprx extracted/installed for vitaGL on your own console.
 - Your own supported original iOS 1.0.11 game files, plus a locally prepared dnmp_ios.img from that exact ARMv7 binary.
   The PC/Steam game files are not compatible with this loader.
-
-**The preparation utility is not included in this binary-only alpha.** New installations require a locally
-generated game image; extracting an IPA alone is not enough. Do not obtain or share a prebuilt game image or
-the original game data through this repository or its issue reports.
-
-1. Back up your existing saves/data before testing. Keep Documents/ and your game configuration.
-2. Put the contents of your supported DukeNukemMP.app folder and your locally prepared dnmp_ios.img in
-   ux0:data/dnmp_ios/. Keep the original subfolder structure (including duke/, data/ and sys/ where present).
-3. Install dnmp-vita-alpha.1.vpk using VitaShell. If upgrading an existing working installation, install the VPK
-   only; there is no game-image change in this alpha.
-4. Start the game. Menus use the front touchscreen. Use the same graphics settings when comparing performance.
-
-Runtime projects: [kubridge](https://github.com/bythos14/kubridge) and [vitaGL](https://github.com/Rinnegatamante/vitaGL).
-This package does not include game assets, the game image or console system modules.
 
 ## Data preparation for a fresh installation
 
