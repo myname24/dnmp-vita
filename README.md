@@ -1,9 +1,9 @@
 # Duke Nukem: Manhattan Project — PS Vita tester alpha.1
 
-**Status: alpha preparation; no public download has been published yet.**
+**Status: experimental tester alpha.** The VPK is available in [release V0.0.1](https://github.com/myname24/dnmp-vita/releases/tag/V0.0.1).
 
 Experimental port of the original iOS ARMv7 build. This public repository contains the tester instructions and
-image-preparation scripts; the VPK is staged in an unpublished draft. The port's runtime source code and development history remain private.
+image-preparation scripts. The port's runtime source code and development history remain private.
 No original game data is included.
 
 This is a compatibility/testing alpha, not a finished release. Earlier builds have been tested on a real Vita,
@@ -147,5 +147,5 @@ accumulator cache is disabled by default. Do not change developer optimization s
 VPK SHA256: c3269c489af0288ba3ce534d061d838642af3dfc88b32b7d065bd3086b373174
 VPK size: 808945 bytes.
 
-Release attachments contain only the VPK and README. The repository also provides image-preparation scripts.
+The release provides the VPK. This repository provides the README and image-preparation scripts.
 Private runtime source, symbols, logs and game files are not release assets.
